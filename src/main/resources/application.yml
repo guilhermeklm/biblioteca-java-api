@@ -16,12 +16,21 @@ spring:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
       hibernate.ddl-auto: update
       hibernate.format_sql: true
+      hibernate:
+        hbm2ddl:
+          auto: update
   datasource:
     type: org.springframework.jdbc.datasource.SimpleDriverDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/karam-library-management
+    url: jdbc:postgresql://localhost:5432/biblioteca
     username: postgres
     password: Guiga123
-    pool-name: Library-Management
+    pool-name: biblioteca
     minimum-idle: 5
     maximum-pool-size: 20
+  flyway:
+    url: jdbc:postgresql://localhost:5432/biblioteca
+    schemas: public
+    user: postgres
+    password: Guiga123
+    baseline-on-migrate: true

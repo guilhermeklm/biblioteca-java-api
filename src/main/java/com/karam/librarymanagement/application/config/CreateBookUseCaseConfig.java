@@ -1,6 +1,6 @@
 package com.karam.librarymanagement.application.config;
 
-import com.karam.librarymanagement.domain.specification.CreateBookSpecification;
+import com.karam.librarymanagement.domain.specification.book.CreateBookSpecification;
 import com.karam.librarymanagement.infraestructure.repository.author.AuthorRepository;
 import com.karam.librarymanagement.infraestructure.repository.book.BookRepository;
 import com.karam.librarymanagement.infraestructure.repository.genre.GenreRepository;

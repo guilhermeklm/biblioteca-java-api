@@ -6,7 +6,7 @@ public abstract class EntitySpecification<T> {
 
     private String errorMessage;
 
-    abstract void validate(T entity);
+    public abstract void validate(T entity);
 
     protected void addErrorMessage(String message) {
         this.errorMessage = message;

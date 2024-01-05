@@ -27,7 +27,7 @@ public abstract class SpecificationTemplate<T> {
         }
     }
 
-    abstract void addSpecifications();
+    protected abstract void addSpecifications();
 
     private void validateSpecifications(T entity) {
         this.entitySpecifications.forEach(specification -> {

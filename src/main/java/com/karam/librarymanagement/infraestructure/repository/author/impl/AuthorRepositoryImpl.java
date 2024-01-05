@@ -36,4 +36,13 @@ public class AuthorRepositoryImpl implements AuthorRepository {
 
         throw new EntityNotFoundException("Author not found");
     }
+
+    @Override
+    public Long findIdByAuthor(Author author) {
+        var bookEntity = converter.toAuthorEntity(author);
+        return jpaRepository.findIdByAuthor(
+                bookEntity.getName(),
+                bookEntity.getCountry()
+        );
+    }
 }

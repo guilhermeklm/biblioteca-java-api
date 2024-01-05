@@ -1,7 +1,7 @@
 package com.karam.librarymanagement.usecase.book.impl;
 
 import com.karam.librarymanagement.application.dto.CreateBookInputDTO;
-import com.karam.librarymanagement.domain.specification.CreateBookSpecification;
+import com.karam.librarymanagement.domain.specification.book.CreateBookSpecification;
 import com.karam.librarymanagement.infraestructure.repository.book.BookRepository;
 import com.karam.librarymanagement.usecase.book.CreateBookUseCase;
 import com.karam.librarymanagement.usecase.book.converter.CreateBookConverter;

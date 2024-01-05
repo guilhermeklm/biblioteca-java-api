@@ -1,9 +1,4 @@
-DO $$
-BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = 'biblioteca') THEN
-    CREATE DATABASE biblioteca;
-END IF;
-END $$;
+create schema if not exists biblioteca;
 
 create table if not exists autor (
                        aut_id bigserial not null,

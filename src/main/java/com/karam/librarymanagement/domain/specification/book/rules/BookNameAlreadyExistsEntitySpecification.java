@@ -1,6 +1,7 @@
-package com.karam.librarymanagement.domain.specification;
+package com.karam.librarymanagement.domain.specification.book.rules;
 
 import com.karam.librarymanagement.domain.Book;
+import com.karam.librarymanagement.domain.specification.EntitySpecification;
 import com.karam.librarymanagement.infraestructure.repository.book.BookRepository;
 
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class BookNameAlreadyExistsEntitySpecification extends EntitySpecificatio
     }
 
     @Override
-    void validate(Book entity) {
+    public void validate(Book entity) {
         var bookId = repository.findIdByTitle(entity.getTitle());
 
         if (Objects.nonNull(bookId)) {

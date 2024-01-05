@@ -7,4 +7,6 @@ public interface AuthorRepository {
     Long save(Author author);
 
     Author findById(Long id);
+
+    Long findIdByAuthor(Author author);
 }

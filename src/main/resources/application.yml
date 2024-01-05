@@ -28,3 +28,4 @@ spring:
     default-schema: biblioteca
     user: postgres
     password: Guiga123
+    baseline-on-migrate: on

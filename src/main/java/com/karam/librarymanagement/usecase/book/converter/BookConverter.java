@@ -1,13 +1,13 @@
-package com.karam.librarymanagement.usecase.book.converter.impl;
+package com.karam.librarymanagement.usecase.book.converter;
 
 import com.karam.librarymanagement.application.dto.CreateBookInputDTO;
 import com.karam.librarymanagement.domain.Book;
 import com.karam.librarymanagement.infraestructure.repository.author.AuthorRepository;
 import com.karam.librarymanagement.infraestructure.repository.genre.GenreRepository;
 import com.karam.librarymanagement.infraestructure.repository.publisher.PublisherRepository;
-import com.karam.librarymanagement.usecase.book.converter.CreateBookConverter;
+import com.karam.librarymanagement.usecase.Converter;
 
-public class CreateBookConverterImpl implements CreateBookConverter {
+public class BookConverter implements Converter<Book, CreateBookInputDTO> {
 
     private AuthorRepository authorRepository;
 
@@ -15,24 +15,25 @@ public class CreateBookConverterImpl implements CreateBookConverter {
 
     private GenreRepository genreRepository;
 
-    public CreateBookConverterImpl(AuthorRepository authorRepository,
-                                   PublisherRepository publisherRepository,
-                                   GenreRepository genreRepository) {
+    public BookConverter(AuthorRepository authorRepository,
+                         PublisherRepository publisherRepository,
+                         GenreRepository genreRepository) {
         this.authorRepository = authorRepository;
         this.publisherRepository = publisherRepository;
         this.genreRepository = genreRepository;
     }
 
-    public Book toBook(CreateBookInputDTO createBookInputDTO) {
-        var author = authorRepository.findById(createBookInputDTO.authorId());
-        var publisher = publisherRepository.findById(createBookInputDTO.publisherId());
-        var genre = genreRepository.findById(createBookInputDTO.genreId());
+    @Override
+    public Book toDomain(CreateBookInputDTO dto) {
+        var author = authorRepository.findById(dto.authorId());
+        var publisher = publisherRepository.findById(dto.publisherId());
+        var genre = genreRepository.findById(dto.genreId());
 
         return new Book.Builder()
-                .title(createBookInputDTO.title())
+                .title(dto.title())
                 .author(author)
                 .publisher(publisher)
-                .yearPublication(createBookInputDTO.yearPublication())
+                .yearPublication(dto.yearPublication())
                 .genre(genre)
                 .build();
     }

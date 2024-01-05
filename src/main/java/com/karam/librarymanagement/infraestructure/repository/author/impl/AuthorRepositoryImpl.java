@@ -3,8 +3,8 @@ package com.karam.librarymanagement.infraestructure.repository.author.impl;
 import com.karam.librarymanagement.domain.Author;
 import com.karam.librarymanagement.infraestructure.repository.author.AuthorJpaRepository;
 import com.karam.librarymanagement.infraestructure.repository.author.AuthorRepository;
-import com.karam.librarymanagement.infraestructure.repository.converter.AuthorEntityConverter;
-import com.karam.librarymanagement.infraestructure.repository.exception.EntityNotFoundException;
+import com.karam.librarymanagement.infraestructure.converter.AuthorEntityConverter;
+import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

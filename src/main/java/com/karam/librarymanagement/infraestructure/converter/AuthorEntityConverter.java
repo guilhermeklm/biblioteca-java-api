@@ -1,4 +1,4 @@
-package com.karam.librarymanagement.infraestructure.repository.converter;
+package com.karam.librarymanagement.infraestructure.converter;
 
 import com.karam.librarymanagement.domain.Author;
 import com.karam.librarymanagement.infraestructure.entity.AuthorEntity;

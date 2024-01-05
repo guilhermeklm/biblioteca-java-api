@@ -1,4 +1,4 @@
-package com.karam.librarymanagement.infraestructure.repository.exception;
+package com.karam.librarymanagement.infraestructure.exception;
 
 public class EntityNotFoundException extends RuntimeException{
 

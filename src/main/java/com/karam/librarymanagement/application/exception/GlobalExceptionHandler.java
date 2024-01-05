@@ -4,7 +4,7 @@ import com.karam.librarymanagement.application.dto.response.ApiErrorResponse;
 import com.karam.librarymanagement.application.dto.response.LinksResponse;
 import com.karam.librarymanagement.application.dto.response.Message;
 import com.karam.librarymanagement.domain.exception.BusinessException;
-import com.karam.librarymanagement.infraestructure.repository.exception.EntityNotFoundException;
+import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new LinksResponse("/books", "POST"),
                 messages
         );
+
         return ResponseEntity.status(exception.getStatusCode()).body(apiErrorResponse);
     }
 

@@ -9,6 +9,7 @@ public class BusinessException extends RuntimeException {
 
     public BusinessException(String message, int statusCode) {
         super(message);
+        this.messages = List.of(message);
         this.statusCode = statusCode;
     }
 

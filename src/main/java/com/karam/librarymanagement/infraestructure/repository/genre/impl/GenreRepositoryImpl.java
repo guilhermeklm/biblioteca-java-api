@@ -1,8 +1,8 @@
 package com.karam.librarymanagement.infraestructure.repository.genre.impl;
 
 import com.karam.librarymanagement.domain.Genre;
-import com.karam.librarymanagement.infraestructure.repository.converter.GenreEntityConverter;
-import com.karam.librarymanagement.infraestructure.repository.exception.EntityNotFoundException;
+import com.karam.librarymanagement.infraestructure.converter.GenreEntityConverter;
+import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundException;
 import com.karam.librarymanagement.infraestructure.repository.genre.GenreJpaRepository;
 import com.karam.librarymanagement.infraestructure.repository.genre.GenreRepository;
 import org.springframework.stereotype.Service;

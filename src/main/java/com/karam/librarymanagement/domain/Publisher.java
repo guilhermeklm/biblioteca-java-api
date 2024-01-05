@@ -8,10 +8,18 @@ public class Publisher extends DomainValidation {
 
     private String name;
 
-    public Publisher(Long id, String name) {
+    private Publisher(Long id, String name) {
         this.id = id;
         this.name = name;
         this.validate();
+    }
+
+    public static Publisher createPublisher(Long id, String name) {
+        return new Publisher(id, name);
+    }
+
+    public static Publisher createPublisher(String name) {
+        return new Publisher(null, name);
     }
 
     private void validate() {

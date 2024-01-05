@@ -6,7 +6,7 @@ import com.karam.librarymanagement.infraestructure.repository.book.BookRepositor
 import com.karam.librarymanagement.infraestructure.repository.genre.GenreRepository;
 import com.karam.librarymanagement.infraestructure.repository.publisher.PublisherRepository;
 import com.karam.librarymanagement.usecase.book.CreateBookUseCase;
-import com.karam.librarymanagement.usecase.book.converter.impl.CreateBookConverterImpl;
+import com.karam.librarymanagement.usecase.book.converter.BookConverter;
 import com.karam.librarymanagement.usecase.book.impl.CreateBookUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class CreateBookUseCaseConfig {
                                                            PublisherRepository publisherRepository,
                                                            GenreRepository genreRepository) {
 
-        var createBookConverterImpl = new CreateBookConverterImpl(
+        var createBookConverterImpl = new BookConverter(
                 authorRepository,
                 publisherRepository,
                 genreRepository

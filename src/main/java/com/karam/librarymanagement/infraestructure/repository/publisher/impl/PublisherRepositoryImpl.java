@@ -1,8 +1,8 @@
 package com.karam.librarymanagement.infraestructure.repository.publisher.impl;
 
 import com.karam.librarymanagement.domain.Publisher;
-import com.karam.librarymanagement.infraestructure.repository.converter.PublisherEntityConverter;
-import com.karam.librarymanagement.infraestructure.repository.exception.EntityNotFoundException;
+import com.karam.librarymanagement.infraestructure.converter.PublisherEntityConverter;
+import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundException;
 import com.karam.librarymanagement.infraestructure.repository.publisher.PublisherJpaRepository;
 import com.karam.librarymanagement.infraestructure.repository.publisher.PublisherRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,13 @@ public class PublisherRepositoryImpl implements PublisherRepository {
     }
 
     @Override
+    public Publisher save(Publisher publisher) {
+        var publisherEntity = converter.toPublisherEntity(publisher);
+        var publisherEntitySaved = jpaRepository.save(publisherEntity);
+        return converter.toPublisher(publisherEntitySaved);
+    }
+
+    @Override
     public Publisher findById(Long id) {
         var publisherEntity = jpaRepository.findById(id);
 
@@ -29,5 +36,10 @@ public class PublisherRepositoryImpl implements PublisherRepository {
         }
 
         throw new EntityNotFoundException("Publisher not found");
+    }
+
+    @Override
+    public Long findIdByName(String name) {
+        return jpaRepository.findIdByName(name);
     }
 }

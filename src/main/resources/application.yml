@@ -14,23 +14,17 @@ spring:
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-      hibernate.ddl-auto: update
+      hibernate.ddl-auto: validate
       hibernate.format_sql: true
-      hibernate:
-        hbm2ddl:
-          auto: update
   datasource:
     type: org.springframework.jdbc.datasource.SimpleDriverDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/biblioteca
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: Guiga123
-    pool-name: biblioteca
-    minimum-idle: 5
-    maximum-pool-size: 20
   flyway:
-    url: jdbc:postgresql://localhost:5432/biblioteca
-    schemas: public
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    default-schema: biblioteca
     user: postgres
     password: Guiga123
-    baseline-on-migrate: true

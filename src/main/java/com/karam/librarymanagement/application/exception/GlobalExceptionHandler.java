@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ControllerAdvice
@@ -21,10 +22,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiErrorResponse> businessError(final BusinessException exception) {
+        var messages = new ArrayList<Message>();
+
+        exception.getMessages().forEach(message -> {
+            messages.add(new Message("key", message));
+        });
+
         var apiErrorResponse = new ApiErrorResponse(
                 exception.getStatusCode(),
                 new LinksResponse("/books", "POST"),
-                List.of(new Message("key", exception.getMessage()))
+                messages
         );
         return ResponseEntity.status(exception.getStatusCode()).body(apiErrorResponse);
     }

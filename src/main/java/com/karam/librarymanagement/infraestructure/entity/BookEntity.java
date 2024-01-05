@@ -3,7 +3,7 @@ package com.karam.librarymanagement.infraestructure.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "livro")
+@Table(name = "livro", schema = "biblioteca")
 public class BookEntity {
 
     @Id
@@ -14,18 +14,18 @@ public class BookEntity {
     @Column(name = "lvr_titulo")
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lvr_autorid", referencedColumnName = "aut_id")
     private AuthorEntity author;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lvr_editoraid", referencedColumnName = "edi_id")
     private PublisherEntity publisher;
 
     @Column(name = "lvr_anopublicacao")
     private String yearPublication;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lvr_generoid", referencedColumnName = "gen_id")
     private GenreEntity genre;
 
@@ -55,8 +55,16 @@ public class BookEntity {
         return author;
     }
 
+    public Long getAuthorId() {
+        return getAuthor().getId();
+    }
+
     public PublisherEntity getPublisher() {
         return publisher;
+    }
+
+    public Long getPublisherId() {
+        return getPublisher().getId();
     }
 
     public String getYearPublication() {
@@ -65,5 +73,9 @@ public class BookEntity {
 
     public GenreEntity getGenre() {
         return genre;
+    }
+
+    public Long getGenreId() {
+        return getGenre().getId();
     }
 }

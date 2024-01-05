@@ -35,4 +35,21 @@ public class BookRepositoryImpl implements BookRepository {
 
         throw new EntityNotFoundException("Book not found");
     }
+
+    @Override
+    public Long findIdByBook(Book book) {
+        var bookEntity = bookEntityConverter.toBookEntity(book);
+        return bookJpaRepository.findIdByBook(
+                bookEntity.getTitle(),
+                bookEntity.getAuthorId(),
+                bookEntity.getPublisherId(),
+                bookEntity.getYearPublication(),
+                bookEntity.getGenreId()
+        );
+    }
+
+    @Override
+    public Long findIdByTitle(String title) {
+        return bookJpaRepository.findIdByTitle(title);
+    }
 }

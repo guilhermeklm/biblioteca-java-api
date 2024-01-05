@@ -8,5 +8,7 @@ public interface BookRepository {
 
     Book findById(Long bookId);
 
-    boolean doesBookExist(Book book);
+    Long findIdByBook(Book book);
+
+    Long findIdByTitle(String title);
 }

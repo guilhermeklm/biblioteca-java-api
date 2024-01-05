@@ -3,7 +3,7 @@ package com.karam.librarymanagement.infraestructure.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "editora")
+@Table(name = "editora", schema = "biblioteca")
 public class PublisherEntity {
 
     @Id

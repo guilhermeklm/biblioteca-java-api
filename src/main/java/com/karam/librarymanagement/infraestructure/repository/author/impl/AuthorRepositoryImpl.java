@@ -8,7 +8,7 @@ import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundExcep
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthorRepositoryImpl implements AuthorRepository {
+class AuthorRepositoryImpl implements AuthorRepository {
 
     private AuthorEntityConverter converter;
     private AuthorJpaRepository jpaRepository;

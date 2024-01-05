@@ -5,9 +5,9 @@ import com.karam.librarymanagement.domain.exception.InvalidValueException;
 
 import java.util.regex.Pattern;
 
-public class Client extends DomainValidation {
+public class Client extends Domain {
 
-    private Long registration;
+    private Long id;
     private String name;
     private String email;
     private String password;
@@ -28,8 +28,8 @@ public class Client extends DomainValidation {
 
     private static final Pattern CPF_PATTERN = Pattern.compile(CPF_REGEX);
 
-    private Client(Long registration, String name, String email, String password, String cpf) {
-        this.registration = registration;
+    private Client(Long id, String name, String email, String password, String cpf) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -67,8 +67,9 @@ public class Client extends DomainValidation {
         }
     }
 
-    public Long getRegistration() {
-        return registration;
+    @Override
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

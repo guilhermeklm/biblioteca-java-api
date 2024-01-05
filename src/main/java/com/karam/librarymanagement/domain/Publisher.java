@@ -2,7 +2,7 @@ package com.karam.librarymanagement.domain;
 
 import com.karam.librarymanagement.domain.exception.FieldIsRequiredException;
 
-public class Publisher extends DomainValidation {
+public class Publisher extends Domain {
 
     private Long id;
 
@@ -28,6 +28,7 @@ public class Publisher extends DomainValidation {
         }
     }
 
+    @Override
     public Long getId() {
         return id;
     }

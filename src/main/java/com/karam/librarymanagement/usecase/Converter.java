@@ -1,6 +1,8 @@
 package com.karam.librarymanagement.usecase;
 
-public interface Converter<Domain, InputDTO> {
+import com.karam.librarymanagement.domain.Domain;
 
-    Domain toDomain(InputDTO dto);
+public interface Converter<D extends Domain, InputDTO> {
+
+    D toDomain(InputDTO dto);
 }

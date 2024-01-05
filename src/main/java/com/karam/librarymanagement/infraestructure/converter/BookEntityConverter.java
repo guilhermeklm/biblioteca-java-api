@@ -27,7 +27,7 @@ public class BookEntityConverter {
         var genre = genreEntityConverter.toGenreEntity(book.getGenre());
 
         return new BookEntity(
-                book.getIsbn(),
+                book.getId(),
                 book.getTitle(),
                 author,
                 publisher,

@@ -27,6 +27,6 @@ public class CreateBookUseCaseConfig {
         );
         var createBookSpecification = new CreateBookSpecification(bookRepository);
 
-        return new CreateBookUseCaseImpl(createBookConverterImpl, bookRepository, createBookSpecification);
+        return new CreateBookUseCaseImpl(createBookConverterImpl, createBookSpecification, bookRepository);
     }
 }

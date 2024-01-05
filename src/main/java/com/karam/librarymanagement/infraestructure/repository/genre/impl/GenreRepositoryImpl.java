@@ -8,7 +8,7 @@ import com.karam.librarymanagement.infraestructure.repository.genre.GenreReposit
 import org.springframework.stereotype.Service;
 
 @Service
-public class GenreRepositoryImpl implements GenreRepository {
+class GenreRepositoryImpl implements GenreRepository {
 
     private GenreJpaRepository jpaRepository;
 

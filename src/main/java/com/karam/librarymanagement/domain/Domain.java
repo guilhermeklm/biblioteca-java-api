@@ -1,6 +1,8 @@
 package com.karam.librarymanagement.domain;
 
-public class DomainValidation {
+public abstract class Domain {
+
+    public abstract Long getId();
 
     protected boolean isNull(Object obj) {
         if (obj == null) {

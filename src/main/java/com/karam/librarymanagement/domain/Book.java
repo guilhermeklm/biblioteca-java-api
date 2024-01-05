@@ -2,7 +2,7 @@ package com.karam.librarymanagement.domain;
 
 import com.karam.librarymanagement.domain.exception.FieldIsRequiredException;
 
-public class Book extends DomainValidation {
+public class Book extends Domain {
 
     private Long isbn;
     private String title;
@@ -29,13 +29,10 @@ public class Book extends DomainValidation {
         if (this.isNull(yearPublication)) {
             throw new FieldIsRequiredException("Campo 'yearPublication' esta nulo");
         }
-
-//        if (this.isNull(genreId)) {
-//            throw new FieldIsRequiredException("Campo 'genreId' esta nulo ou o valor é incorreto");
-//        }
     }
 
-    public Long getIsbn() {
+    @Override
+    public Long getId() {
         return isbn;
     }
 

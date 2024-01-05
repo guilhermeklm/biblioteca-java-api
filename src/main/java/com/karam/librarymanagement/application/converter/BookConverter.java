@@ -14,7 +14,7 @@ public class BookConverter {
 
     public GetBookOutputDTO toGetBookOutputDTO(Book book) {
         return new GetBookOutputDTO(
-                book.getIsbn(),
+                book.getId(),
                 book.getTitle(),
                 book.getAuthorId(),
                 book.getPublisherId(),

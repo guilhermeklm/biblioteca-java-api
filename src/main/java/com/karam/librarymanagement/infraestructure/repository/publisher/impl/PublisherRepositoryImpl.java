@@ -8,7 +8,7 @@ import com.karam.librarymanagement.infraestructure.repository.publisher.Publishe
 import org.springframework.stereotype.Service;
 
 @Service
-public class PublisherRepositoryImpl implements PublisherRepository {
+class PublisherRepositoryImpl implements PublisherRepository {
 
     private PublisherJpaRepository jpaRepository;
 

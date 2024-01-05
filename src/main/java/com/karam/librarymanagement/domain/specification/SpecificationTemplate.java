@@ -1,17 +1,18 @@
 package com.karam.librarymanagement.domain.specification;
 
+import com.karam.librarymanagement.domain.Domain;
 import com.karam.librarymanagement.domain.exception.BusinessException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SpecificationTemplate<T> {
+public abstract class SpecificationTemplate<D extends Domain> {
 
-    private List<EntitySpecification<T>> entitySpecifications;
+    private List<EntitySpecification<D>> entitySpecifications;
 
     private List<String> errorMessages;
 
-    public void validate(T entity) {
+    public void validate(D entity) {
         this.initializateErrorMessages();
         this.addSpecifications();
 
@@ -29,7 +30,7 @@ public abstract class SpecificationTemplate<T> {
 
     protected abstract void addSpecifications();
 
-    private void validateSpecifications(T entity) {
+    private void validateSpecifications(D entity) {
         this.entitySpecifications.forEach(specification -> {
             specification.validate(entity);
 
@@ -47,7 +48,7 @@ public abstract class SpecificationTemplate<T> {
         this.errorMessages = null;
     }
 
-    protected void setEntitySpecifications(List<EntitySpecification<T>> entitySpecifications) {
+    protected void setEntitySpecifications(List<EntitySpecification<D>> entitySpecifications) {
         this.entitySpecifications = entitySpecifications;
     }
 

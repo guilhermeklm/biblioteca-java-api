@@ -1,12 +1,14 @@
 package com.karam.librarymanagement.domain.specification;
 
+import com.karam.librarymanagement.domain.Domain;
+
 import java.util.Objects;
 
-public abstract class EntitySpecification<T> {
+public abstract class EntitySpecification<D extends Domain> {
 
     private String errorMessage;
 
-    public abstract void validate(T entity);
+    public abstract void validate(D entity);
 
     protected void addErrorMessage(String message) {
         this.errorMessage = message;

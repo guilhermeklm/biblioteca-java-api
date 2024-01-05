@@ -8,7 +8,7 @@ import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundExcep
 import org.springframework.stereotype.Component;
 
 @Component
-public class BookRepositoryImpl implements BookRepository {
+class BookRepositoryImpl implements BookRepository {
 
     private BookJpaRepository bookJpaRepository;
 

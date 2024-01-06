@@ -5,6 +5,7 @@ import com.karam.librarymanagement.application.dto.response.LinksResponse;
 import com.karam.librarymanagement.application.dto.response.Message;
 import com.karam.librarymanagement.domain.exception.BusinessException;
 import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ApiErrorResponse> businessError(final BusinessException exception) {
+    public ResponseEntity<ApiErrorResponse> businessError(final BusinessException exception,
+                                                          HttpServletRequest request) {
         var messages = new ArrayList<Message>();
 
         exception.getMessages().forEach(message -> {
@@ -30,7 +32,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         var apiErrorResponse = new ApiErrorResponse(
                 exception.getStatusCode(),
-                new LinksResponse("/books", "POST"),
+                new LinksResponse(request.getRequestURI(), request.getMethod()),
                 messages
         );
 
@@ -38,21 +40,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> entityNotFoundError(final EntityNotFoundException exception) {
-        // Como pegar o href da request e o method
+    public ResponseEntity<ApiErrorResponse> entityNotFoundError(final EntityNotFoundException exception,
+                                                                HttpServletRequest request) {
         var apiErrorResponse = new ApiErrorResponse(
                 exception.getStatusCode(),
-                new LinksResponse("/books", "POST"),
+                new LinksResponse(request.getRequestURI(), request.getMethod()),
                 List.of(new Message("key", exception.getMessage()))
         );
         return ResponseEntity.status(exception.getStatusCode()).body(apiErrorResponse);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiErrorResponse> runtimeException(final RuntimeException exception) {
+    public ResponseEntity<ApiErrorResponse> runtimeException(final RuntimeException exception,
+                                                             HttpServletRequest request) {
         var apiErrorResponse = new ApiErrorResponse(
                 500,
-                new LinksResponse("/books", "POST"),
+                new LinksResponse(request.getRequestURI(), request.getMethod()),
                 List.of(new Message("key", exception.getMessage()))
         );
         return ResponseEntity.status(500).body(apiErrorResponse);

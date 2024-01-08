@@ -2,6 +2,8 @@ package com.karam.librarymanagement.domain;
 
 import com.karam.librarymanagement.domain.exception.FieldIsRequiredException;
 
+import java.util.Objects;
+
 public class Publisher extends Domain {
 
     private Long id;
@@ -26,6 +28,18 @@ public class Publisher extends Domain {
         if (this.isNull(this.name)) {
             throw new FieldIsRequiredException("Campo 'name' esta nulo ou o valor é incorreto");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Publisher publisher)) return false;
+        return Objects.equals(getId(), publisher.getId()) && Objects.equals(getName(), publisher.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName());
     }
 
     @Override

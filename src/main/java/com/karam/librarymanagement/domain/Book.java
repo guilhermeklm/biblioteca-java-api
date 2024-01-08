@@ -2,6 +2,11 @@ package com.karam.librarymanagement.domain;
 
 import com.karam.librarymanagement.domain.exception.FieldIsRequiredException;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Book extends Domain {
 
     private Long isbn;
@@ -65,6 +70,48 @@ public class Book extends Domain {
     }
     public Long getGenreId() {
         return this.getGenre().getId();
+    }
+
+    public List<String> modifiedFields(Book newBook, Book oldBook) {
+        List<String> modifiedFieldsList = new ArrayList<>();
+        Field[] fields = this.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            try {
+                field.setAccessible(true);
+
+                if ("isbn".equals(field.getName())) {
+                    continue;
+                }
+
+                Object newValue = field.get(newBook);
+                Object oldValue = field.get(oldBook);
+
+                if ((newValue == null && oldValue != null) || (newValue != null && !newValue.equals(oldValue))) {
+                    modifiedFieldsList.add(field.getName());
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Erro ao listar campos alterados");
+            }
+        }
+        return modifiedFieldsList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book book)) return false;
+        return Objects.equals(getId(), book.getId()) &&
+                Objects.equals(getTitle(), book.getTitle()) &&
+                Objects.equals(getAuthor(), book.getAuthor()) &&
+                Objects.equals(getPublisher(), book.getPublisher()) &&
+                Objects.equals(getYearPublication(), book.getYearPublication()) &&
+                Objects.equals(getGenre(), book.getGenre());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getAuthor(), getPublisher(), getYearPublication(), getGenre());
     }
 
     public static class Builder {

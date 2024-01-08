@@ -1,4 +1,4 @@
-package com.karam.librarymanagement.domain.specification.author.rules;
+package com.karam.librarymanagement.domain.specification.author;
 
 import com.karam.librarymanagement.domain.Author;
 import com.karam.librarymanagement.domain.specification.EntitySpecification;
@@ -6,17 +6,19 @@ import com.karam.librarymanagement.infraestructure.repository.author.AuthorRepos
 
 import java.util.Objects;
 
-public class AuthorAlreadyExistsSpecification extends EntitySpecification<Author> {
+class AuthorAlreadyExistsSpecification extends EntitySpecification<Author> {
 
     private AuthorRepository repository;
 
-    public AuthorAlreadyExistsSpecification(AuthorRepository repository) {
+    public AuthorAlreadyExistsSpecification(Author newAuthor,
+                                            AuthorRepository repository) {
+        super(newAuthor);
         this.repository = repository;
     }
 
     @Override
-    public void validate(Author entity) {
-        var authorId = repository.findIdByAuthor(entity);
+    public void validate() {
+        var authorId = repository.findIdByAuthor(this.getDomain());
 
         if (Objects.nonNull(authorId)) {
             addErrorMessage("Author already exists");

@@ -2,6 +2,8 @@ package com.karam.librarymanagement.domain;
 
 import com.karam.librarymanagement.domain.exception.FieldIsRequiredException;
 
+import java.util.Objects;
+
 public class Author extends Domain {
     private Long id;
     private String name;
@@ -35,6 +37,20 @@ public class Author extends Domain {
 
     public String getCountry() {
         return country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Author author)) return false;
+        return Objects.equals(getId(), author.getId()) &&
+                Objects.equals(getName(), author.getName()) &&
+                Objects.equals(getCountry(), author.getCountry());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getCountry());
     }
 
     public static class Builder {

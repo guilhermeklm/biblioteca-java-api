@@ -3,7 +3,6 @@ package com.karam.librarymanagement.domain.specification.publisher;
 import com.karam.librarymanagement.domain.Publisher;
 import com.karam.librarymanagement.domain.specification.EntitySpecification;
 import com.karam.librarymanagement.domain.specification.SpecificationTemplate;
-import com.karam.librarymanagement.domain.specification.publisher.rules.PublisherAlreadyExistsSpecification;
 import com.karam.librarymanagement.infraestructure.repository.publisher.PublisherRepository;
 
 import java.util.ArrayList;
@@ -17,9 +16,9 @@ public class CreatePublisherSpecification extends SpecificationTemplate<Publishe
     }
 
     @Override
-    protected void addSpecifications() {
+    protected void addSpecifications(Publisher newPublisher) {
         var specifications = new ArrayList<EntitySpecification<Publisher>>();
-        specifications.add(new PublisherAlreadyExistsSpecification(repository));
+        specifications.add(new PublisherAlreadyExistsSpecification(newPublisher, repository));
         this.setEntitySpecifications(specifications);
     }
 }

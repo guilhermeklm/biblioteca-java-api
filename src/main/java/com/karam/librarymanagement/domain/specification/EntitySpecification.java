@@ -6,9 +6,14 @@ import java.util.Objects;
 
 public abstract class EntitySpecification<D extends Domain> {
 
+    private final D domain;
     private String errorMessage;
 
-    public abstract void validate(D entity);
+    public EntitySpecification(D domain) {
+        this.domain = domain;
+    }
+
+    public abstract void validate();
 
     protected void addErrorMessage(String message) {
         this.errorMessage = message;
@@ -20,5 +25,9 @@ public abstract class EntitySpecification<D extends Domain> {
 
     public boolean hasErrorMessage() {
         return Objects.nonNull(this.errorMessage);
+    }
+
+    public D getDomain() {
+        return domain;
     }
 }

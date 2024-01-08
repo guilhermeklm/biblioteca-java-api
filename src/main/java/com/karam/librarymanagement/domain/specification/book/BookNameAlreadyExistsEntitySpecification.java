@@ -1,4 +1,4 @@
-package com.karam.librarymanagement.domain.specification.book.rules;
+package com.karam.librarymanagement.domain.specification.book;
 
 import com.karam.librarymanagement.domain.Book;
 import com.karam.librarymanagement.domain.specification.EntitySpecification;
@@ -6,17 +6,19 @@ import com.karam.librarymanagement.infraestructure.repository.book.BookRepositor
 
 import java.util.Objects;
 
-public class BookNameAlreadyExistsEntitySpecification extends EntitySpecification<Book> {
+class BookNameAlreadyExistsEntitySpecification extends EntitySpecification<Book> {
 
     private BookRepository repository;
 
-    public BookNameAlreadyExistsEntitySpecification(BookRepository repository) {
+    public BookNameAlreadyExistsEntitySpecification(Book newBook,
+                                                    BookRepository repository) {
+        super(newBook);
         this.repository = repository;
     }
 
     @Override
-    public void validate(Book entity) {
-        var bookId = repository.findIdByTitle(entity.getTitle());
+    public void validate() {
+        var bookId = repository.findIdByTitle(getDomain().getTitle());
 
         if (Objects.nonNull(bookId)) {
             addErrorMessage("Title already exists");

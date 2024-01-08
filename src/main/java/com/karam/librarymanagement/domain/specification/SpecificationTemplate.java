@@ -14,9 +14,9 @@ public abstract class SpecificationTemplate<D extends Domain> {
 
     public void validate(D entity) {
         this.initializateErrorMessages();
-        this.addSpecifications();
+        this.addSpecifications(entity);
 
-        this.validateSpecifications(entity);
+        this.validateSpecifications();
 
         try {
             if (this.hasErrorMessages()) {
@@ -28,11 +28,11 @@ public abstract class SpecificationTemplate<D extends Domain> {
         }
     }
 
-    protected abstract void addSpecifications();
+    protected abstract void addSpecifications(D entity);
 
-    private void validateSpecifications(D entity) {
+    private void validateSpecifications() {
         this.entitySpecifications.forEach(specification -> {
-            specification.validate(entity);
+            specification.validate();
 
             if (specification.hasErrorMessage()) {
                 this.errorMessages.add(specification.getErrorMessage());

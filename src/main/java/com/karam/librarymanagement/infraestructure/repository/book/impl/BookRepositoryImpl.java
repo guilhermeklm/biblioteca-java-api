@@ -1,10 +1,10 @@
 package com.karam.librarymanagement.infraestructure.repository.book.impl;
 
 import com.karam.librarymanagement.domain.Book;
-import com.karam.librarymanagement.infraestructure.repository.book.BookJpaRepository;
-import com.karam.librarymanagement.infraestructure.repository.book.BookRepository;
 import com.karam.librarymanagement.infraestructure.converter.BookEntityConverter;
 import com.karam.librarymanagement.infraestructure.exception.EntityNotFoundException;
+import com.karam.librarymanagement.infraestructure.repository.book.BookJpaRepository;
+import com.karam.librarymanagement.infraestructure.repository.book.BookRepository;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,10 +20,10 @@ class BookRepositoryImpl implements BookRepository {
         this.bookEntityConverter = bookEntityConverter;
     }
 
-    public Long save(Book book) {
+    public Book save(Book book) {
         var bookEntity = bookEntityConverter.toBookEntity(book);
         var bookEntitySaved = bookJpaRepository.save(bookEntity);
-        return bookEntitySaved.getIsbn();
+        return bookEntityConverter.toBook(bookEntitySaved);
     }
 
     public Book findById(Long bookId) {
@@ -51,5 +51,10 @@ class BookRepositoryImpl implements BookRepository {
     @Override
     public Long findIdByTitle(String title) {
         return bookJpaRepository.findIdByTitle(title);
+    }
+
+    @Override
+    public boolean existsById(Long bookId) {
+        return bookJpaRepository.existsById(bookId);
     }
 }

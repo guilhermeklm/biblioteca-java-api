@@ -1,8 +1,9 @@
 package com.karam.librarymanagement.usecase.book;
 
 import com.karam.librarymanagement.application.dto.CreateBookInputDTO;
+import com.karam.librarymanagement.domain.Book;
 
 public interface CreateBookUseCase {
 
-    Long create(CreateBookInputDTO createBookInputDTO);
+    Book create(CreateBookInputDTO createBookInputDTO);
 }

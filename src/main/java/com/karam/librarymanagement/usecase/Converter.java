@@ -4,5 +4,5 @@ import com.karam.librarymanagement.domain.Domain;
 
 public interface Converter<D extends Domain, InputDTO> {
 
-    D toDomain(InputDTO dto);
+    D convert(InputDTO dto);
 }

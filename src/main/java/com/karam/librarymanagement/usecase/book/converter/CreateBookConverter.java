@@ -5,9 +5,9 @@ import com.karam.librarymanagement.domain.Book;
 import com.karam.librarymanagement.infraestructure.repository.author.AuthorRepository;
 import com.karam.librarymanagement.infraestructure.repository.genre.GenreRepository;
 import com.karam.librarymanagement.infraestructure.repository.publisher.PublisherRepository;
-import com.karam.librarymanagement.usecase.CreateDomainConverter;
+import com.karam.librarymanagement.usecase.Converter;
 
-public class BookConverter extends CreateDomainConverter<Book, CreateBookInputDTO> {
+public class CreateBookConverter implements Converter<Book, CreateBookInputDTO> {
 
     private AuthorRepository authorRepository;
 
@@ -15,16 +15,16 @@ public class BookConverter extends CreateDomainConverter<Book, CreateBookInputDT
 
     private GenreRepository genreRepository;
 
-    public BookConverter(AuthorRepository authorRepository,
-                         PublisherRepository publisherRepository,
-                         GenreRepository genreRepository) {
+    public CreateBookConverter(AuthorRepository authorRepository,
+                               PublisherRepository publisherRepository,
+                               GenreRepository genreRepository) {
         this.authorRepository = authorRepository;
         this.publisherRepository = publisherRepository;
         this.genreRepository = genreRepository;
     }
 
     @Override
-    public Book toDomain(CreateBookInputDTO dto) {
+    public Book convert(CreateBookInputDTO dto) {
         var author = authorRepository.findById(dto.getAuthorId());
         var publisher = publisherRepository.findById(dto.getPublisherId());
         var genre = genreRepository.findById(dto.getGenreId());

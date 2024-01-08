@@ -2,12 +2,12 @@ package com.karam.librarymanagement.usecase.publisher.converter;
 
 import com.karam.librarymanagement.application.dto.CreatePublisherInputDTO;
 import com.karam.librarymanagement.domain.Publisher;
-import com.karam.librarymanagement.usecase.CreateDomainConverter;
+import com.karam.librarymanagement.usecase.Converter;
 
-public class PublisherConverter extends CreateDomainConverter<Publisher, CreatePublisherInputDTO> {
+public class CreatePublisherConverter implements Converter<Publisher, CreatePublisherInputDTO> {
 
     @Override
-    public Publisher toDomain(CreatePublisherInputDTO dto) {
+    public Publisher convert(CreatePublisherInputDTO dto) {
         return Publisher.createPublisher(dto.name());
     }
 }

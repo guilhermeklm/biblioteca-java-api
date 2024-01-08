@@ -1,7 +1,5 @@
 package com.karam.librarymanagement.application.dto;
 
-import java.time.LocalDate;
-
 public class GetBookOutputDTO extends OutputDTO {
 
     private Long isbn;

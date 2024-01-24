@@ -13,4 +13,6 @@ public interface BookRepository {
     Long findIdByTitle(String title);
 
     boolean existsById(Long bookId);
+
+    long countBooksByAuthorId(Long authorId);
 }

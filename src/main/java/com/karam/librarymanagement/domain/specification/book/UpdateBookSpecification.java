@@ -21,6 +21,7 @@ public class UpdateBookSpecification extends SpecificationTemplate<Book> {
         specifications.add(new BookNameAlreadyExistsEntitySpecification(newBook, repository));
         specifications.add(new BookAlreadyExistsEntitySpecification(newBook, repository));
         specifications.add(new BookNotExistsSpecification(newBook, repository));
+        specifications.add(new LimitBooksByAnAuthorExceeded(newBook, repository));
         this.setEntitySpecifications(specifications);
     }
 }

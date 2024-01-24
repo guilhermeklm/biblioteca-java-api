@@ -19,6 +19,7 @@ public class CreateBookSpecification extends SpecificationTemplate<Book> {
         var specifications = new ArrayList<EntitySpecification<Book>>();
         specifications.add(new BookNameAlreadyExistsEntitySpecification(newBook, repository));
         specifications.add(new BookAlreadyExistsEntitySpecification(newBook, repository));
+        specifications.add(new LimitBooksByAnAuthorExceeded(newBook, repository));
         this.setEntitySpecifications(specifications);
     }
 }

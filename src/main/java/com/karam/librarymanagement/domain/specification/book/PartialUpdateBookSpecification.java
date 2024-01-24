@@ -17,8 +17,6 @@ public class PartialUpdateBookSpecification extends SpecificationTemplate<Book> 
 
     @Override
     protected void addSpecifications(Book newBook) {
-        //TODO - precisa validar somente os campos q editei
-
         var specifications = new ArrayList<EntitySpecification<Book>>();
         var oldBook = repository.findById(newBook.getId());
         var modifiedFields = oldBook.modifiedFields(newBook, oldBook);
@@ -27,7 +25,14 @@ public class PartialUpdateBookSpecification extends SpecificationTemplate<Book> 
             specifications.add(new BookNameAlreadyExistsEntitySpecification(newBook, repository));
         }
 
-        specifications.add(new BookAlreadyExistsEntitySpecification(newBook, repository));
+        if (modifiedFields.contains("author")) {
+            specifications.add(new LimitBooksByAnAuthorExceeded(newBook, repository));
+        }
+
+        if (!modifiedFields.isEmpty()){
+            specifications.add(new BookAlreadyExistsEntitySpecification(newBook, repository));
+        }
+
         this.setEntitySpecifications(specifications);
     }
 }

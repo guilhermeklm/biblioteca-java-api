@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 class BookRepositoryImpl implements BookRepository {
 
-    private BookJpaRepository bookJpaRepository;
+    private final BookJpaRepository bookJpaRepository;
 
-    private BookEntityConverter bookEntityConverter;
+    private final BookEntityConverter bookEntityConverter;
 
     public BookRepositoryImpl(BookJpaRepository bookJpaRepository,
                               BookEntityConverter bookEntityConverter) {
@@ -56,5 +56,10 @@ class BookRepositoryImpl implements BookRepository {
     @Override
     public boolean existsById(Long bookId) {
         return bookJpaRepository.existsById(bookId);
+    }
+
+    @Override
+    public long countBooksByAuthorId(Long authorId) {
+        return bookJpaRepository.countByAuthorId(authorId);
     }
 }

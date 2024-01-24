@@ -6,7 +6,7 @@ import com.karam.librarymanagement.infraestructure.repository.book.BookRepositor
 
 class BookNotExistsSpecification extends EntitySpecification<Book> {
 
-    private BookRepository repository;
+    private final BookRepository repository;
 
     public BookNotExistsSpecification(Book newBook,
                                       BookRepository repository) {

@@ -25,4 +25,8 @@ public interface BookJpaRepository extends JpaRepository<BookEntity, Long> {
     @Query(value = "select lvr_isbn from biblioteca.livro where " +
             "lvr_titulo = :title", nativeQuery = true)
     Long findIdByTitle(@Param("title") String title);
+
+    @Query(value = "select count(lvr_isbn) from biblioteca.livro where lvr_autorid = :authorId",
+            nativeQuery = true)
+    long countByAuthorId(@Param("authorId") long authorId);
 }

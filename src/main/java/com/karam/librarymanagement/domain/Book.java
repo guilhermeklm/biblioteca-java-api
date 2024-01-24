@@ -1,6 +1,7 @@
 package com.karam.librarymanagement.domain;
 
 import com.karam.librarymanagement.domain.exception.FieldIsRequiredException;
+import com.karam.librarymanagement.domain.exception.InvalidValueException;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -33,6 +34,16 @@ public class Book extends Domain {
 
         if (this.isNull(yearPublication)) {
             throw new FieldIsRequiredException("Campo 'yearPublication' esta nulo");
+        }
+
+        try {
+            var yearPublicationNum = Long.parseLong(this.yearPublication);
+
+            if (yearPublicationNum < 1700) {
+                throw new InvalidValueException("Ano de publicacao precisa ser igual ou maior que 1700");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidValueException("Data de publicacao é invalida:" + e.getMessage());
         }
     }
 
